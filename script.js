@@ -24,7 +24,7 @@ function randomEl(arr) {
 
 //   loop vasitəsilə gizli sözün hərflərini tapiriq. 
   while (hiddenWord.includes("_")) {
-    alert(`Sizin gizli sozunuz: ${hiddenWord.join(" ")}`);     
+    prompt(`Sizin gizli sozunuz: ${hiddenWord.join(" ")}`);     
   
     const letter = prompt("Bir herf daxil edin:").toLowerCase();
   
@@ -42,4 +42,26 @@ function randomEl(arr) {
   }
   
   alert(`Tebrikler! Sozu tapdiniz: ${guessWord.join("")}`);
+
+
+
+
+
+
+
+
+// function greet(name) {
+
+//   return function() {
+//     console.log("Hello, " + name + "!");
+//   };
+// }
+
+
+// const greetJohn = greet("John");
+// greetJohn(); 
+
+// const greetAlice = greet("Alice");
+// greetAlice();
+
   
