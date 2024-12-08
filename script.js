@@ -1,67 +1,53 @@
+alert("Söz oyununa xoş gəlmisiniz!");
+alert("Qaydalar: Hər oyunda iki şansınız olacaq!");
 
+function randomEl(arr) {
+  const rIndex = Math.floor(Math.random() * arr.length);
+  return arr[rIndex];
+}
 
+const words = ["aysen", "anar", "aynur"];
+let playAgain = true; // Oyuna başlamaq üçün `true` olaraq təyin edirik
 
+while (playAgain) {
+  const guessWord = randomEl(words).split(""); // Təsadüfi sözü seçirik və hərflərə ayırırıq
+  const hiddenWord = guessWord.map(() => "_"); // Sözü "_" ilə gizlədirik
+  let chances = 2; // İstifadəçinin 2 şansı var
 
+  // Gizli söz tapılmadıqca dövr davam edir
+  while (hiddenWord.includes("_") && chances > 0) {
+    alert(`Gizli söz: ${hiddenWord.join(" ")}`); // Gizli sözün hal-hazırkı vəziyyətini göstəririk
+    const letter = prompt("Bir hərf daxil edin:").toLowerCase(); // İstifadəçidən hərf daxil etməyi istə
 
-
-// Burda randomEl adli bir funkiya yaratmisiq ve random 0 ilə 1 arasında təsadüfi onluq ədəd yaradır. 
-// Elementlərin sayına vurularaq təsadüfi indeks alınır. 
-// Math.floor() – Onluq hissəni goturur tam ədədə çevirir. 
-
-
-function randomEl(arr) {                                  
-    const rIndex = Math.floor(Math.random() * arr.length);   
-    return arr[rIndex];    
-}                                                           
-                                                               
-  const words = ["aysen", "anar", "aynur"];
-  const guessWord = randomEl(words).split("");          // Burda təsadüfi sözu seçir və hərflərə ayırir
-  const hiddenWord = guessWord.map(() => "_"); // daha sonra hərfləri "_" ilə əvəz edirik.
-  
-
-
-
-
-//   loop vasitəsilə gizli sözün hərflərini tapiriq. 
-  while (hiddenWord.includes("_")) {
-    prompt(`Sizin gizli sozunuz: ${hiddenWord.join(" ")}`);     
-  
-    const letter = prompt("Bir herf daxil edin:").toLowerCase();
-  
+    // Əgər daxil edilən hərf doğruysa, doğru yerləri doldururuq
     if (guessWord.includes(letter)) {
-                                                // Tapılan hərfin bütün indekslərini doldururuq.
       guessWord.forEach((item, index) => {
         if (item === letter) {
-          hiddenWord[index] = letter;
+          hiddenWord[index] = letter; // Düzgün olan hərfi tapırıq
         }
       });
-      alert(`Tebrikler! "${letter}" herfini tapdiniz.`);
+      alert(`Təbriklər! "${letter}" hərfini tapdınız.`);
     } else {
-      alert(`Bele, "${letter}" sozde yoxdur.`);
+      chances--; // Şans azalır
+      alert(`Təəssüf ki, "${letter}" sözdə yoxdur. Qalan şansınız: ${chances}`);
     }
   }
+
+  // Oyunun sonu
+  if (!hiddenWord.includes("_")) {
+    alert(`Təbriklər! Sözü tapdınız: ${guessWord.join("")}`);
+  } else {
+    alert(`Uduzdunuz! Gizli söz: ${guessWord.join("")}`);
+  }
+
+  playAgain = confirm("Yenidən oynamaq istəyirsiniz?");
+}
+
+alert("Oyunu oynadığınız üçün təşəkkürlər!");
+
+    
+
+
+    
   
-  alert(`Tebrikler! Sozu tapdiniz: ${guessWord.join("")}`);
 
-
-
-
-
-
-
-
-// function greet(name) {
-
-//   return function() {
-//     console.log("Hello, " + name + "!");
-//   };
-// }
-
-
-// const greetJohn = greet("John");
-// greetJohn(); 
-
-// const greetAlice = greet("Alice");
-// greetAlice();
-
-  
